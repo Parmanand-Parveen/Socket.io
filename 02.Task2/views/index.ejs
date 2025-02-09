@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+</head>
+
+<body>
+    <input class="border-2 ml-5 px-4 py-2 message" type="text">
+    <button class="sendbtn border-2 ml-5 px-4 py-2 bg-sky-600 text-white" onclick="sendMessage()">Send</button>
+    <ul class="messagelist"></ul>
+
+    <script>
+        const socket = io()
+        let btn = document.querySelector(".sendbtn")
+        let message = document.querySelector(".message")
+        let messageBox = document.querySelector(".messagelist")
+        function sendMessage() {
+            const msg = message.value
+            socket.emit("message", msg)
+            message.value = ""
+        }
+        socket.on("message", (msg) => {
+            const li = document.createElement("li")
+            li.innerText = msg
+            messageBox.appendChild(li)
+        })
+    </script>
+</body>
+
+</html>
