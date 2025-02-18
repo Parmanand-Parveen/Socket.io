@@ -22,13 +22,14 @@ io.on("connection",(socket)=>{
         users[socket.id]= {userName , room}
         socket.join(room)
         console.log(`${userName} joined room: ${room}`)
-        socket.to(room).emit("message",{user: "System", text: `${userName} has joined the chat`})
+        socket.to(room).emit("message",{userName: "System", text: `${userName} has joined the chat`})
     })
     
 
      socket.on("sendMessage", ({sender, message, room})=>{
         io.to(room).emit("message",{userName : sender,text: message, room})
      })
+     
     //Handleing personal messanging
 
     socket.on("privateMessage",({recipientId, message , sender})=>{

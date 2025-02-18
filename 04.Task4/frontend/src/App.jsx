@@ -28,10 +28,10 @@ const App = () => {
     const sendPrivateMessage = () => {
         if (privateMessage && recipientId) {
             socket.emit('privateMessage', { recipientId, message: privateMessage, sender: userName });
-            // setPrivateMessages((prev) => [...prev, { sender: 'Me', message: privateMessage }]);
+            setPrivateMessages((prev) => [...prev, { sender: 'Me', message: privateMessage }]);
             setPrivateMessage('');
         }
-    };
+    }
 
   
    
